@@ -1,0 +1,127 @@
+/* GT Maru Regular */
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Regular-Oblique.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Light */
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Light-Oblique.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Medium */
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Medium-Oblique.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Bold */
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Bold-Oblique.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Black */
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru';
+  src: url('/fonts/GT Maru/GT-Maru-Black-Oblique.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Mono Regular */
+@font-face {
+  font-family: 'GT-Maru-Mono';
+  src: url('/fonts/GT Maru/GT-Maru-Mono-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru-Mono';
+  src: url('/fonts/GT Maru/GT-Maru-Mono-Regular-Oblique.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Mono Medium */
+@font-face {
+  font-family: 'GT-Maru-Mono';
+  src: url('/fonts/GT Maru/GT-Maru-Mono-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT-Maru-Mono';
+  src: url('/fonts/GT Maru/GT-Maru-Mono-Medium-Oblique.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* GT Maru Mega Midi (for special display text) */
+@font-face {
+  font-family: 'GT-Maru-Mega-Midi';
+  src: url('/fonts/GT Maru/GT-Maru-Mega-Midi.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} 
