@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { SendHorizontal, LoaderCircle, Trash2, Key, Palette, Undo } from "lucide-react";
+import { SendHorizontal, LoaderCircle, Trash2, Key, Palette, Undo, Download } from "lucide-react";
 import Head from "next/head";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Image from "next/image";
@@ -207,7 +207,7 @@ export default function Home() {
   };
 
   const undoLastDraw = () => {
-    if (canvasHistory.length > 0) {
+    if (canvasHistory.length > 1) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
       const img = new window.Image();
@@ -216,9 +216,15 @@ export default function Home() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
       };
-      const lastState = canvasHistory[canvasHistory.length - 1];
-      img.src = lastState;
+      const previousState = canvasHistory[canvasHistory.length - 2];
+      img.src = previousState;
       setCanvasHistory((prev) => prev.slice(0, -1));
+    } else if (canvasHistory.length === 1) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      setCanvasHistory([]);
     }
   };
 
@@ -427,10 +433,10 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <menu className="flex items-center bg-cartoon-secondary/20 rounded-xl p-3 shadow-sm self-start sm:self-auto border-2 border-cartoon-secondary">
+            <menu className="flex items-center gap-2 bg-cartoon-secondary/20 rounded-xl p-2 shadow-sm self-start sm:self-auto border-2 border-cartoon-secondary">
               <button
                 type="button"
-                className="w-14 h-14 rounded-full overflow-hidden mr-4 flex items-center justify-center border-4 border-black shadow-lg transition-transform hover:scale-110 bounce-hover cartoon-button relative"
+                className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border-4 border-black shadow-lg transition-transform hover:scale-110 bounce-hover cartoon-button relative"
                 onClick={openColorPicker}
                 onKeyDown={handleKeyDown}
                 aria-label="选择颜色"
@@ -449,7 +455,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={undoLastDraw}
-                className="w-14 h-14 rounded-full flex items-center justify-center bg-cartoon-secondary text-white shadow-lg transition-all hover:scale-110 mr-4 bounce-hover cartoon-button"
+                className="w-12 h-12 rounded-full flex items-center justify-center bg-cartoon-secondary text-white shadow-lg transition-all hover:scale-110 bounce-hover cartoon-button"
                 aria-label="撤销"
                 disabled={canvasHistory.length === 0}
                 style={{ opacity: canvasHistory.length === 0 ? 0.5 : 1 }}
@@ -459,7 +465,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setShowDeleteConfirm(true)}
-                className="w-14 h-14 rounded-full flex items-center justify-center bg-cartoon-primary text-white shadow-lg transition-all hover:scale-110 mr-4 bounce-hover cartoon-button"
+                className="w-12 h-12 rounded-full flex items-center justify-center bg-cartoon-primary text-white shadow-lg transition-all hover:scale-110 bounce-hover cartoon-button"
                 aria-label="清除画布"
               >
                 <Trash2 className="w-7 h-7 drop-shadow-md" />
@@ -470,11 +476,29 @@ export default function Home() {
                   openApiKeyModal();
                   showConfetti();
                 }}
-                className="w-14 h-14 rounded-full flex items-center justify-center bg-cartoon-accent shadow-lg transition-all hover:scale-110 bounce-hover cartoon-button"
+                className="w-12 h-12 rounded-full flex items-center justify-center bg-cartoon-accent shadow-lg transition-all hover:scale-110 bounce-hover cartoon-button"
                 title="设置API密钥"
                 aria-label="设置API密钥"
               >
                 <Key className="w-7 h-7 text-black drop-shadow-md" />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const canvas = canvasRef.current;
+                  if (!canvas) return;
+                  const link = document.createElement('a');
+                  link.download = '我的画作.png';
+                  link.href = canvas.toDataURL('image/png');
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="w-12 h-12 rounded-full flex items-center justify-center bg-cartoon-green text-white shadow-lg transition-all hover:scale-110 bounce-hover cartoon-button"
+                title="下载画作"
+                aria-label="下载画作"
+              >
+                <Download className="w-7 h-7 drop-shadow-md" />
               </button>
             </menu>
           </div>
@@ -492,7 +516,7 @@ export default function Home() {
               onTouchStart={startDrawing}
               onTouchMove={draw}
               onTouchEnd={stopDrawing}
-              className="border-4 border-dashed border-cartoon-primary rounded-3xl w-full hover:cursor-crosshair sm:h-[60vh] h-[30vh] min-h-[320px] bg-white/95 touch-none shadow-lg paper-shadow paper-edge"
+              className="border-4 border-dashed border-cartoon-primary rounded-3xl w-full hover:cursor-crosshair h-[75vh] min-h-[320px] bg-white/95 touch-none shadow-lg paper-shadow paper-edge"
             />
           </div>
 
