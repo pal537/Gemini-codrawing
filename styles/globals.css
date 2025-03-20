@@ -112,25 +112,15 @@ body {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 3px var(--cartoon-blue);
 }
 
-/* Bouncy animation */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
+/* Hover effects */
 .bounce-hover:hover {
-  animation: bounce 0.5s ease infinite;
-}
-
-/* Wiggle animation */
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0); }
-  25% { transform: rotate(-5deg); }
-  75% { transform: rotate(5deg); }
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
 }
 
 .wiggle-hover:hover {
-  animation: wiggle 0.5s ease infinite;
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
 /* 彩虹文本效果 */

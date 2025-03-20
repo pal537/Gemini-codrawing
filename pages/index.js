@@ -430,7 +430,7 @@ export default function Home() {
             <menu className="flex items-center bg-cartoon-secondary/20 rounded-xl p-3 shadow-sm self-start sm:self-auto border-2 border-cartoon-secondary">
               <button
                 type="button"
-                className="w-14 h-14 rounded-full overflow-hidden mr-4 flex items-center justify-center border-4 border-black shadow-lg transition-transform hover:scale-110 bounce-hover cartoon-button"
+                className="w-14 h-14 rounded-full overflow-hidden mr-4 flex items-center justify-center border-4 border-black shadow-lg transition-transform hover:scale-110 bounce-hover cartoon-button relative"
                 onClick={openColorPicker}
                 onKeyDown={handleKeyDown}
                 aria-label="选择颜色"
@@ -442,7 +442,7 @@ export default function Home() {
                   type="color"
                   value={penColor}
                   onChange={handleColorChange}
-                  className="opacity-0 absolute w-px h-px"
+                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
                   aria-label="选择颜色"
                 />
               </button>
