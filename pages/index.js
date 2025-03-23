@@ -20,6 +20,14 @@ export default function Home() {
   const [apiKey, setApiKey] = useState("");
   const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const [apiKeyError, setApiKeyError] = useState("");
+  const [usePublicKey, setUsePublicKey] = useState(false);
+  const publicKeys = [
+    "AIzaSyDRmxCmACNA0YmYU-50JPaKRVVThmH-NOI",
+    "AIzaSyDRN3NUhzFKc6BqJGV6_mfwEenVSfpHwJY",
+    "AIzaSyBC_6fQ3T5xXGx3Qty5RiXRKCX7qPACPQ0",
+    "AIzaSyAJSuFoxlAG2862kTKf51wnUZMphH2V0sA"
+  ];
+  const [currentPublicKeyIndex, setCurrentPublicKeyIndex] = useState(0);
 
   // **异步加载 confetti 库**
   useEffect(() => {
@@ -247,7 +255,7 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!canvasRef.current) return;
-    if (!apiKey) {
+    if (!apiKey && !usePublicKey) {
       setShowApiKeyModal(true);
       return;
     }
@@ -262,7 +270,16 @@ export default function Home() {
       tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
       tempCtx.drawImage(canvas, 0, 0);
       const drawingData = tempCanvas.toDataURL("image/png").split(",")[1];
-      const genAI = new GoogleGenerativeAI(apiKey);
+      
+      // 使用公共密钥或用户自己的密钥
+      let currentApiKey = apiKey;
+      if (usePublicKey) {
+        currentApiKey = publicKeys[currentPublicKeyIndex];
+        // 更新索引以循环使用公共密钥
+        setCurrentPublicKeyIndex((prevIndex) => (prevIndex + 1) % publicKeys.length);
+      }
+      
+      const genAI = new GoogleGenerativeAI(currentApiKey);
       const model = genAI.getGenerativeModel({
         model: "gemini-2.0-flash-exp-image-generation",
         generationConfig: {
@@ -330,6 +347,7 @@ export default function Home() {
       return;
     }
     setApiKeyError("");
+    setUsePublicKey(false); // 使用用户自己的API密钥
     setShowApiKeyModal(false);
   };
 
@@ -391,24 +409,34 @@ export default function Home() {
             </p>
             <div className="mb-6">
               <label htmlFor="apiKey" className="block text-xl font-bold text-cartoon-secondary mb-3">
-                🔑 魔法钥匙
+                🔑 输入：Gemini api-key
               </label>
               <input
                 type="text"
                 id="apiKey"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder="AIzaSyA..."
+                placeholder="输入私有密钥，并点击：使用私有KEY"
                 className="cartoon-input w-full px-5 py-4 text-lg border-cartoon-secondary"
               />
               {apiKeyError && <p className="mt-2 text-cartoon-primary font-bold text-lg">{apiKeyError}</p>}
             </div>
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-4">
               <button
                 onClick={handleSaveApiKey}
                 className="cartoon-button bubble-button bg-cartoon-accent text-black px-8 py-4 text-xl font-bold rounded-2xl bounce-hover"
               >
-                ✨ 开始神奇冒险！ ✨
+                ✨ 使用私有KEY ✨
+              </button>
+              <button
+                onClick={() => {
+                  setUsePublicKey(true);
+                  setShowApiKeyModal(false);
+                  showConfetti();
+                }}
+                className="cartoon-button bubble-button bg-cartoon-green text-white px-8 py-4 text-xl font-bold rounded-2xl bounce-hover"
+              >
+                🚀 立即进入（公共KEY）🚀
               </button>
             </div>
           </div>
