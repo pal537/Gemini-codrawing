@@ -10,6 +10,8 @@ app_port: 3000
 short_description: 'Gemini 2.0 native image generation co-doodling'
 ---
 
+🌈 **演示地址 | Demo:** [https://hua.31tu.com/](https://hua.31tu.com/)
+
 # Gemini Co-Drawing | Gemini 协作绘图
 
 [English](#english) | [中文](#chinese)
